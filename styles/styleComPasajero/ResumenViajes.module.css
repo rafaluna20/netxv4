@@ -3,7 +3,7 @@
   background-color: rgb(146, 146, 146);
   border-radius: 5px;
   padding: 8px;
-height: 80px;
+height: 60px;
 
   display: flex;
   flex-direction: row;
@@ -14,15 +14,15 @@ height: 80px;
 .ResumenTexto{
   background-color: rgb(184, 184, 184);
   border-radius: 5px;
-  width: 135px;
+  width: 150px;
   text-align: center;
 }
 .ResumenNumero{
-    font-size: 20px;
+    font-size: 25px;
     font-weight: 600;
 }
 .ResumenD{
-  font-size: 15px;
+  font-size: 16px;
 }
 
 
@@ -37,7 +37,7 @@ height: 80px;
 
   border-radius: 3px;
   padding: 4px 0;
-height: 45px;
+height: 40px;
 
 }
 
@@ -55,7 +55,7 @@ height: 45px;
     font-weight: 600;
 }
 .ResumenD{
-  font-size: 10px;
+  font-size: 11px;
 }
 
 

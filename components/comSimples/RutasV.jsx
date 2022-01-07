@@ -21,7 +21,7 @@ margin:3px 0;
   background-color: rgb(238, 238, 238);
     border-radius: 5px;
   width: 99%;
-  height: 28px;
+  height: 35px;
   display: grid;
   gap: 2px;
   grid-template-columns: 1fr 3fr 0.5fr;
@@ -74,7 +74,7 @@ background-color: rgb(155, 155, 155);
   margin:1px 0;
   border-radius: 3px;
   width: 98%;
-  height: 20px;
+  height: 25px;
   gap: 1px;
   box-shadow: 0px 3px 21px 0px rgba(0, 0, 0, 0.6);
 
@@ -85,7 +85,7 @@ background-color: rgb(155, 155, 155);
 .cajaViajes{
 
 
-  font-size: 10px;
+  font-size: 12px;
 
 
 }
@@ -94,11 +94,11 @@ background-color: rgb(155, 155, 155);
 
 
   font-weight: 600;
-  font-size: 10px;
+  font-size: 12px;
 }
 .cajaVer{
   font-weight: 600;
-  font-size: 10px;
+  font-size: 12px;
 
 }
 

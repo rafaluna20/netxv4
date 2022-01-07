@@ -11,7 +11,7 @@ import ResumenViajes from '../components/comPasajero/ResumenViajes'
 import CajaM from '../components/comSimples/CajaM'
 import SalidaLocal from '../components/comPasajero/SalidaLocal'
 import RutasV from '../components/comSimples/RutasV'
-import DistinosMio from '../components/comPasajero/DestinosMio'
+import DestinosMio from '../components/comPasajero/DestinosMio'
 
 
 export default function Home() {
@@ -43,11 +43,7 @@ export default function Home() {
               <SalidaInterprovincialS />
             </div>
 
-            <div className={styles.InterprovincialLocal}>
-
-              <CajaM />
-              <CajaM />
-            </div>
+   
 
             <div className={styles.InterprovincialLocal}>
 
@@ -57,8 +53,8 @@ export default function Home() {
             </div>
             <div className={styles.InterprovincialLocal}>
 
-              <DistinosMio/>
-              <DistinosMio />
+              <DestinosMio/>
+              <DestinosMio />
 
             </div>
             <div className={styles.InterprovincialLocal}>
