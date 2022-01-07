@@ -1,52 +1,120 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Layout from '../components/layout/Layout'
+import Router from 'next/router'
+
+import useValidacion from '../hooks/useValidacion'
+import validarIniciarSesion from '../../producFinal/validacion/validarIniciarSesion'
+import firebase from '../firebase'
+
+
+const STATE_INICIAL = {
+  email: "",
+  password: ""
+
+}
+
+
 
 const Login = () => {
+
+
+  const [error, guardarError] = useState(false);
+  const { valores, errores, handleSubmit, handleChange, handleBlur } = useValidacion(STATE_INICIAL, validarIniciarSesion, iniciarSesion);
+  const { email, password } = valores;
+
+  async function iniciarSesion() {
+    try {
+      await firebase.login(email, password);
+
+      Router.push('/');
+    } catch (error) {
+      console.error('Hubo un error al autenticar el usuario ', error.message);
+      guardarError(error.message);
+    }
+  }
+
+
+
+
   return (
     <Layout>
 
-<div className='caja0'>
+      <div className='caja0'>
 
-      <div className='cajaPrincipal'>
+        <div className='cajaPrincipal'>
 
-        <div className='cajaLogin'>
-          <div className='cajaTitulo'>LOGIN</div>
+          <div className='cajaLogin'>
+            <div className='cajaTitulo'>LOGIN</div>
 
-          <form>
-            <div className='LabelInput'>
+            <form
 
-              <label htmlFor="email">Email</label>
-              <input
-                className=''
-                type="email"
-                id="email"
-                placeholder="Tu Email"
-                name="email"
+              onSubmit={handleSubmit}
+            >
 
-              // value={email}
-              // onChange={handleChange}
-              // onBlur={handleBlur}
-              />
-            </div>
+              {errores.email && <div style={{ color: "red", background: "black", textAlign: "center" }}>{errores.email}</div>}
+              <div className='LabelInput'>
+
+                <label htmlFor="email">Email</label>
+                <input
+                  className=''
+                  type="email"
+                  id="email"
+                  placeholder="Tu Email"
+                  name="email"
+
+                  value={email}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+              </div>
+
+              {errores.password && <div style={{ color: "red", background: "black", textAlign: "center" }}>{errores.password}</div>}
+              <div className='LabelInput'>
+
+                <label htmlFor="password">Password</label>
+                <input
+                  type="password"
+                  id="password"
+                  placeholder="Tu Password"
+                  name="password"
+
+                  value={password}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+
+              </div>
 
 
               <div className='LabelInput'>
+                <input
+                  className='cajaCrearCuenta'
+                  type="submit"
+                  value="INICIAR SESION" />
+              </div>
+              {error && <div style={{ color: "red", background: "black", textAlign: "center" }}>{error}</div>}
 
-              <label htmlFor="password">Password</label>
-              <input
-                type="password"
-                id="password"
-                placeholder="Tu Password"
-                name="password"
-              />
-
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
-</div>
+
+
 
       <style jsx>{`
+
+
+.cajaCrearCuenta{
+  background-color:rgb(41, 41, 41);
+  color:white;
+  font-size:1.2rem;
+  padding: 1rem 0;
+}
+.cajaCrearCuenta:hover{
+  background-color:rgb(70, 70, 70);
+  color:white;
+  font-size:1.2rem;
+}
 
 .cajaTitulo{
   text-align: center;
@@ -107,6 +175,16 @@ const Login = () => {
 
 @media (max-width: 600px) {
 
+  .cajaCrearCuenta{
+ padding: 0.8rem 0;
+  font-size:1.1rem;
+}
+.cajaCrearCuenta:hover{
+
+  font-size:1.1rem;
+}
+
+
   .cajaTitulo{
 
   text-align: center;
@@ -136,8 +214,8 @@ const Login = () => {
 .cajaPrincipal{
    padding-top:8rem;
    border-radius:3px ;
-       padding-left:0.1rem;
-        padding-right:0.1rem;
+       padding-left:0.6rem;
+        padding-right:0.6rem;
 
 }
 

@@ -3,14 +3,18 @@ import Link from 'next/link';
 import Image from 'next/image';
 import stilos from '../../styles/stylelayout/Header.module.css'
 
-import { useState } from 'react';
+import { FirebaseContext } from '../../firebase';
+
+import { useState,useContext } from 'react';
 
 
 const Header = () => {
 
 
 
-  const usuario = false;
+  const { usuario, firebase } = useContext(FirebaseContext );
+
+
 
   return (
     <div className={stilos.cajaHeader}>
@@ -37,13 +41,19 @@ const Header = () => {
 
         {usuario ? (
           <>
+            <Link href="/CrearViaje">
+              <a className={stilos.crearLogin}>Crear viaje</a>
+            </Link>
             <div className={stilos.botones}>
-             Login: rafa
+             Hola:{usuario.displayName}
             </div>
 
             <div className={stilos.botones}>
 
-              <button type='button'> cerrar sesion</button>
+              <button
+               type='button'
+               onClick={()=>firebase.cerrarSesion()}
+               > cerrar sesion</button>
 
             </div>
 

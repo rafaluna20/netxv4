@@ -1,7 +1,41 @@
-import React from 'react'
+import React,{useState} from 'react'
+import Router from 'next/router'
 import Layout from '../components/layout/Layout'
 
+import useValidacion from '../hooks/useValidacion'
+import validarCrearCuenta from '../validacion/validarCrearCuenta'
+
+import firebase from '../firebase'
+
+
+const STATE_INICIAL = {
+  nombre: "",
+  email: "",
+  password: ""
+
+}
+
 const CrearCuenta = () => {
+  const [error, guardarError] = useState(false);
+
+  const { valores, errores, handleSubmit, handleChange, handleBlur } = useValidacion(STATE_INICIAL, validarCrearCuenta, crearCuenta)
+
+  const { nombre, email, password } = valores;
+
+  async function crearCuenta() {
+    try {
+    await  firebase.registrar(nombre, email, password);
+    Router.push("/")
+    } catch (error) {
+console.error("hubo un error al crear usuario",error.message);
+guardarError(error.message);
+return
+    }
+    guardarError(false);
+  }
+
+
+
   return (
     <Layout>
 
@@ -12,7 +46,11 @@ const CrearCuenta = () => {
           <div className='cajaLogin'>
             <div className='cajaTitulo'>CREAR CUENTA</div>
 
-            <form>
+            <form
+
+              onSubmit={handleSubmit}
+            >
+              {errores.nombre && <div style={{ color: "red", background: "black", textAlign: "center" }}>{errores.nombre}</div>}
 
               <div className='LabelInput'>
 
@@ -24,12 +62,13 @@ const CrearCuenta = () => {
                   placeholder="Tu nombre"
                   name="nombre"
 
-                // value={nombre}
-                // onChange={handleChange}
-                // onBlur={handleBlur}
+                  value={nombre}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                 />
               </div>
 
+              {errores.email && <div style={{ color: "red", background: "black", textAlign: "center" }}>{errores.email}</div>}
               <div className='LabelInput'>
 
                 <label htmlFor="email">Email</label>
@@ -40,13 +79,13 @@ const CrearCuenta = () => {
                   placeholder="Tu Email"
                   name="email"
 
-                // value={email}
-                // onChange={handleChange}
-                // onBlur={handleBlur}
+                  value={email}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                 />
               </div>
 
-
+              {errores.password && <div style={{ color: "red", background: "black", textAlign: "center" }}>{errores.password}</div>}
               <div className='LabelInput'>
 
                 <label htmlFor="password">Password</label>
@@ -55,15 +94,44 @@ const CrearCuenta = () => {
                   id="password"
                   placeholder="Tu Password"
                   name="password"
+
+                  value={password}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                 />
 
               </div>
+
+
+              <div className='LabelInput'>
+
+                <input
+                  className='cajaCrearCuenta'
+                  type="submit"
+                  value="CREAR CUENTA" />
+              </div>
+              {error && <div style={{ color: "red", background: "black", textAlign: "center" }}>{error}</div>}
+
             </form>
           </div>
         </div>
       </div>
 
       <style jsx>{`
+
+.cajaCrearCuenta{
+  background-color:rgb(41, 41, 41);
+  color:white;
+  font-size:1.4rem;
+}
+.cajaCrearCuenta:hover{
+  background-color:rgb(70, 70, 70);
+  color:white;
+  font-size:1.4rem;
+}
+
+
+
 
 .cajaTitulo{
   text-align: center;
@@ -124,6 +192,16 @@ const CrearCuenta = () => {
 
 @media (max-width: 600px) {
 
+.cajaCrearCuenta{
+
+  font-size:1.1rem;
+}
+
+.cajaCrearCuenta:hover{
+
+  font-size:1.1rem;
+}
+
   .cajaTitulo{
 
   text-align: center;
@@ -153,8 +231,8 @@ const CrearCuenta = () => {
 .cajaPrincipal{
    padding-top:8rem;
    border-radius:3px ;
-       padding-left:0.1rem;
-        padding-right:0.1rem;
+       padding-left:0.7rem;
+        padding-right:0.7rem;
 
 }
 

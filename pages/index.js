@@ -43,20 +43,19 @@ export default function Home() {
               <SalidaInterprovincialS />
             </div>
 
-   
-
-            <div className={styles.InterprovincialLocal}>
-
-              <SalidaLocal />
-              <SalidaLocal />
-
-            </div>
-            <div className={styles.InterprovincialLocal}>
+           <div className={styles.InterprovincialLocal}>
 
               <DestinosMio/>
               <DestinosMio />
 
+            </div>   
+
+            <div className={styles.InterprovincialLocal}>
+
+              <SalidaLocal />
+
             </div>
+ 
             <div className={styles.InterprovincialLocal}>
 
               <RutasV 
