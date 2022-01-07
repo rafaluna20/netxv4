@@ -164,7 +164,7 @@ const CrearViaje = () => {
    background-color: rgb(61, 61, 61);
    max-width: 1200px;
    margin: 0 auto;
-   padding-top:5rem;
+   padding-top:1rem;
    height: 100vh;
    border-radius:5px ;
       
@@ -173,7 +173,7 @@ const CrearViaje = () => {
 
 .cajaLogin{
   background-color: rgb(143, 143, 143);
-    margin: 0 auto;
+    margin-left:1rem;
     padding:1rem;
    max-width: 400px;
    border-radius:5px ;

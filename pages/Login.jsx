@@ -3,7 +3,7 @@ import Layout from '../components/layout/Layout'
 import Router from 'next/router'
 
 import useValidacion from '../hooks/useValidacion'
-import validarIniciarSesion from '../../producFinal/validacion/validarIniciarSesion'
+import validarIniciarSesion from '../validacion/validarIniciarSesion'
 import firebase from '../firebase'
 
 
